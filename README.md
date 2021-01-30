@@ -12,11 +12,12 @@
 
 
 ## COVID-19: Visualized
-Using D3 and COVID Databases, the COVID-19 Visualized app will compile the data based on user-defined selections to view the following:
+Using D3 and COVID Databases created in Project 1 &  2, the COVID-19 Visualized app will compile the data based on user-defined selections to view the following:
 
 
 1.	US COVID vs Influenza Experience
 2.	Canada COVID Incidence and Deaths by Province
 3.	Canada COVID Wave - Evolution over 2020
+
 
 	

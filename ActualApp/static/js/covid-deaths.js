@@ -10,6 +10,13 @@
 
 d3.json('/api').then(function(response){
   console.log(response)
+  var country = response.Country;
+  var totalCases = response.Total_Cases;
+  var totalDeaths = response.Total_Deaths;
+  var totalRecovered = response.Total_Recovered;
+  var activeCases = response.Active_Cases;
+  var totalTests = response.Total_Tests;
+  var population = response.Population;
 })
 
 

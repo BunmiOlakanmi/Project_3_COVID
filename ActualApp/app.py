@@ -26,12 +26,19 @@ def index():
 #service route
 @app.route("/api")
 def stringencyRoute():
-    data= db.collection_stringency.find()
-    json_docs = []
-    for doc in data:
-        json_doc = json.dumps(doc, default=json_util.default)
-        json_docs.append(json_doc)
-    return jsonify(json_docs)
+    test=db.get_collection("collection_stringency").find()
+    master_list=[]
+    for i in test:
+        master_list.append(i)
+    for i in master_list:
+        del i['_id']
+
+    # data= db.collection_stringency.find()
+    # json_docs = []
+    # for doc in data:
+    #     json_doc = json.dumps(doc, default=json_util.default)
+    #     json_docs.append(json_doc)
+    return jsonify(master_list)
 
 if __name__ == "__main__":
     app.run(debug=True)

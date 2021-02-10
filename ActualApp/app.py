@@ -24,20 +24,40 @@ def index():
     return render_template("index.html")
 
 #service route
-@app.route("/api")
-def stringencyRoute():
-    test=db.get_collection("collection_stringency").find()
+#covid infection data route
+@app.route("/api_covid_infection")
+def infectionRoute():
+    test=db.get_collection("collection_covid_infection").find()
     master_list=[]
     for i in test:
         master_list.append(i)
     for i in master_list:
         del i['_id']
 
-    # data= db.collection_stringency.find()
-    # json_docs = []
-    # for doc in data:
-    #     json_doc = json.dumps(doc, default=json_util.default)
-    #     json_docs.append(json_doc)
+    return jsonify(master_list)
+
+#influenza data route
+@app.route("/api_influenza")
+def influenzaRoute():
+    test=db.get_collection("collection_influenza").find()
+    master_list=[]
+    for i in test:
+        master_list.append(i)
+    for i in master_list:
+        del i['_id']
+
+    return jsonify(master_list)
+
+#unemployment data route
+@app.route("/api_unemployment")
+def unemploymentRoute():
+    test=db.get_collection("collection_unemployment").find()
+    master_list=[]
+    for i in test:
+        master_list.append(i)
+    for i in master_list:
+        del i['_id']
+
     return jsonify(master_list)
 
 if __name__ == "__main__":

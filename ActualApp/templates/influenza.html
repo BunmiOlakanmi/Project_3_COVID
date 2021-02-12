@@ -6,8 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Covid-19 Visualized</title>
-    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">-->
+    <title>Influenza Data Visualized</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -16,8 +15,8 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div class="navbar-collapse collapse" >
-                    <a class="nav-link list" href='/'>Covid-19 Infection Data</a>
-                    <a class="nav-link list" href='/influenza'>Influenza Data</a>
+                    <a class="nav-link list" href="/">Covid-19 Infection Data</a>
+                    <a class="nav-link list" href="/influenza">Influenza Data</a>
                     <a class="nav-link list" href='/unemployment'>Unemployment Data</a>
         </div>
     </nav>
@@ -25,21 +24,13 @@
         
          <div class="row banner">
           <div class="col-md-12 jumbotron text-center">
-            <h1 class="banner" style=margin-top:60px>COVID-19 Data Visualized</h1>
-            <p>Use the interactive charts below to explore the dataset</p>
+            <h1 class="banner" style=margin-top:50px>Influenza Data Visualized</h1>
           </div>
         
         </div>
         <div class="row">
           <div class="col-md-2">
-            <div class="well">
-              <h5>COVID-19 Country Data:</h5>
-              <select id="selDataset" onchange="optionChanged(this.value)"></select>
-            </div>
             <div class="panel panel-primary">
-              <!--<div class="panel-heading">
-                <h3 class="panel-title">COVID-19 Country Data</h3>
-              </div>-->
               <div id="data-type" class="panel-body"></div>
             </div>
           </div>
@@ -51,7 +42,6 @@
       </div>
 
 
-<!--<h1>test</h1>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!--<script src="{{ url_for('static', filename='js/app.js') }}"></script>-->

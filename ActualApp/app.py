@@ -23,6 +23,14 @@ db = client.covid_db
 def index():
     return render_template("index.html")
 
+@app.route('/influenza')
+def influenzaPage():
+    return render_template("influenza.html")
+
+@app.route('/unemployment')
+def unemploymentPage():
+    return render_template("unemployment.html")
+
 #service route
 #covid infection data route
 @app.route("/api_covid_infection")

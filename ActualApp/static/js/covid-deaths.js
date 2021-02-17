@@ -1,6 +1,3 @@
-
-
-
 function pietotalCases(){
   d3.json('/api_covid_infection').then(function(response){
     var country = response.map(covid=>covid.Country);
@@ -210,32 +207,32 @@ function piePopulation(){
 }
 
 function optionChanged(selectedData){
-  if (selectedData =="total_cases"){
+  if (selectedData =="Total Cases"){
     var panel = d3.select("#pie");
     panel.html("");
     pietotalCases();
   } 
-  else if (selectedData =="total_deaths"){
+  else if (selectedData =="Total Deaths"){
     var panel = d3.select("#pie");
     panel.html("");
     pietotalDeaths();
   }
-  else if (selectedData == "active_cases"){
+  else if (selectedData == "Active Cases"){
     var panel = d3.select("#pie");
     panel.html("");
     pieactiveCases();
   }
-  else if(selectedData == "total_recovered"){
+  else if(selectedData == "Total Recovered"){
     var panel = d3.select("#pie");
     panel.html("");
     pietotalRecovered();
   }
-  else if (selectedData == "total_tests"){
+  else if (selectedData == "Total Tests"){
     var panel = d3.select("#pie");
     panel.html("");
     pietotalTests();
   }
-  else if(selectedData == "population"){
+  else if(selectedData == "Population"){
     var panel = d3.select("#pie");
     panel.html("");
     piePopulation();
@@ -243,7 +240,37 @@ function optionChanged(selectedData){
 }
 
 function init() {
-  var dropdownValues= ["total_cases", "total_deaths", "active_cases", "total_recovered", "total_tests", "population"];
+  d3.json('/api_covid_infection').then(function(response){
+    var country = response.map(covid=>covid.Country);
+    var population = response.map(covid=>covid.Population);
+    console.log(country);
+    var populationData = [{
+      values: population,
+      labels: country,
+      //domain: {column: 0},
+      name: 'Population',
+      hoverinfo: 'labels + values + name',
+      textinfo: 'none',
+      hole: .4,
+      type: 'pie'
+    }];
+
+    var populationLayout = {
+      title: 'Population by Country',
+      annotations: 
+        {
+          font: {
+          size: 20
+        },
+          showarrow: false,
+        text: 'COVID-19',
+        x: 0.17,
+        y: 0.5
+      }
+    };
+  Plotly.newPlot("pie", populationData, populationLayout);
+  });
+  var dropdownValues= ["Total Cases", "Total Deaths", "Active Cases", "Total Recovered", "Total Tests", "Population"];
   var dropdownMenu = d3.select("#selDataset");
   dropdownValues.forEach((sample)=>{
     dropdownMenu.append("option")

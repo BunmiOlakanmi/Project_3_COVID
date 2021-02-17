@@ -12,11 +12,11 @@ var width = svgWidth - leftMargin - rightMargin;
 var height = svgHeight - topMargin - bottomMargin;
 
 
-d3.csv("unemployment_rates.csv").then(function(unemploymentdata) {
+d3.json("/api_unemployment", function(error, unemploymentdata) {
 
     var parseTime = d3.timeParse("%Y-%m-%d");
 
-    unemploymentdata.forEach(function(data) {
+    unemploymentdata.forEach(function (data) {
         data.Time_dt = parseTime(data.Time_dt);
         data.Unemployment_Rate = +data.Unemployment_Rate;
         data.Country = data.Country;

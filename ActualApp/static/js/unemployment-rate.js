@@ -21,7 +21,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Import Data
-d3.json('/api_unemployment').then(function(unemploymentdata) {
+d3.json("/api_unemployment").then(function(error, unemploymentdata) {
 
     var parseTime = d3.timeParse("%Y-%m-%d");
   

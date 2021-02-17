@@ -12,7 +12,7 @@ var width = svgWidth - leftMargin - rightMargin;
 var height = svgHeight - topMargin - bottomMargin;
 
 
-d3.csv("unemployment_rates.csv").then(function(unemploymentdata) {
+d3.json("/api_unemployment", function(error, unemploymentdata) {
 
     var parseTime = d3.timeParse("%Y-%m-%d");
 
@@ -77,7 +77,7 @@ console.log(sumstat)
 var Countryname = sumstat.map(d => d.key) 
 var color = d3.scaleOrdinal().domain(Countryname).range(colorbrewer.Set2[6])
 
-//select path - three types: curveBasis,curveStep, curveCardinal
+//select path - curveLinear
 d3.select("svg")
     .selectAll(".line")
     .append("g")

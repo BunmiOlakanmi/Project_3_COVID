@@ -1,155 +1,113 @@
 var svgWidth = 960;
 var svgHeight = 600;
-padding = 100;
 
+var margin = {
+  top: 40,
+  right: 40,
+  bottom: 80,
+  left: 100
+};
 
-leftMargin=70
-topMargin=30
-bottomMargin=40
-rightMargin=40
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
 
-var width = svgWidth - leftMargin - rightMargin;
-var height = svgHeight - topMargin - bottomMargin;
+// Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
+var svg = d3.select(".chart")
+  .append("svg")
+  .attr("width", svgWidth)
+  .attr("height", svgHeight);
 
+var chartGroup = svg.append("g")
+  .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-d3.json("/api_unemployment", function(error, unemploymentdata) {
+// Import Data
+d3.json('/api_unemployment').then(function(unemploymentdata) {
 
     var parseTime = d3.timeParse("%Y-%m-%d");
-
+  
+  // Step 1: Parse Data/Cast as numbers
+    // ==============================
     unemploymentdata.forEach(function(data) {
-        data.Time_dt = parseTime(data.Time_dt);
-        data.Unemployment_Rate = +data.Unemployment_Rate;
-        data.Country = data.Country;
-
+      data.Time_dt = parseTime(data.Time_dt);
+      data.Unemployment_Rate = +data.Unemployment_Rate;
     });
 
-// define the x scale (horizontal)
-var mindate = new Date(2020,02,28),
-    maxdate = new Date(2020,09,01);
+    // define the x scale (horizontal)
+    var mindate = new Date(2020,01,31),
+        maxdate = new Date(2020,08,01);
+
+    // Step 2: Create scale functions
+    // ==============================
+    var xTimeScale = d3.scaleTime()
+      .domain([mindate, maxdate])
+      .range([0, width]);
+
+    var yLinearScale = d3.scaleLinear()
+      .domain([0, d3.max(unemploymentdata, d => d.Unemployment_Rate)])
+      .range([height, 0]);
+
+    // Step 3: Create axis functions
+    // ==============================
+    var bottomAxis = d3.axisBottom(xTimeScale)
+      .tickFormat(d3.timeFormat("%Y-%m-%d"));
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+    // Step 4: Append Axes to the chart
+    // ==============================
+    chartGroup.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(bottomAxis);
+
+    chartGroup.append("g")
+      .call(leftAxis);
+
+    // Step 5: Create Circles
+    // ==============================
+    var circlesGroup = chartGroup.selectAll("circle")
+      .data(unemploymentdata)
+      .enter()
+      .append("circle")
+      .attr("cx", d => xTimeScale(d.Time_dt))
+      .attr("cy", d => yLinearScale(d.Unemployment_Rate))
+      .attr("r", "15")
+      .attr("fill", "orange")
+      .attr("opacity", ".4");
+ 
+    var dateFormatter = d3.timeFormat("%Y-%m-%d");
 
 
-// scale xAxis
-var xScale = d3.scaleTime()
-    .domain([mindate, maxdate])
-    .range([leftMargin, 900])
+    // Step 1: Append tooltip div
+    var toolTip = d3.select("body")
+      .append("div")
+      .classed("tooltip", true);
 
-// scale yAxis
-var yScale=d3.scaleLinear()
-    .domain([0, 25])
-    .range([600, padding]);
-
-xAxis = d3.axisBottom(xScale)
-    .tickFormat(d3.timeFormat("%Y-%m-%d"));
-
-d3.select("svg")
-    .append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(0,620)")
-    .call(xAxis)
-    .append("text")
-    .attr("x", (900+70)/2) 
-    .attr("y", "50")
-    .text("April 2020 to October 2020")
-
-yAxis = d3.axisLeft()
-    .scale(yScale)
-    .ticks(12)
-
-d3.select('svg')
-    .append("g")
-    .attr("class", "axis")
-    .attr("transform", `translate(${leftMargin},20)`) //use variable in translate
-    .call(yAxis)
-    .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("x", "-190")
-    .attr("y", "-40")
-    .attr("text-anchor", "end")
-    .text("Unemployment Rates Worldwide (%)")
-
-var sumstat = d3.nest() 
-    .key(d => d.Country)
-    .entries(unemploymentdata);
-
-console.log(sumstat)
-
-//set color pallete for different vairables
-var Countryname = sumstat.map(d => d.key) 
-var color = d3.scaleOrdinal().domain(Countryname).range(colorbrewer.Set2[6])
-
-//select path - curveLinear
-d3.select("svg")
-    .selectAll(".line")
-    .append("g")
-    .attr("class", "line")
-    .data(sumstat)
-    .enter()
-    .append("path")
-    .attr("d", function (d) {
-        return d3.line()
-            .x(d => xScale(d.Time_dt))
-            .y(d => yScale(d.Unemployment_Rate)).curve(d3.curveLinear)
-            (d.values)
+    // Step 2: Create "mouseover" event listener to display tooltip
+    circlesGroup.on("mouseover", function(d) {
+      toolTip.style("display", "block")
+          .html(
+            `<strong>${d.Country}<strong><hr>${d.Unemployment_Rate}
+        rate of unemployment`)
+          .style("left", d3.event.pageX + "px")
+          .style("top", d3.event.pageY + "px");
     })
-    .attr("fill", "none")
-    .attr("stroke", d => color(d.key))
-    .attr("stroke-width", 2)
-    
-
-//append title
-d3.select("svg")
-    .append("text")
-    .attr("x", 500)
-    .attr("y", 70)
-    .attr("text-anchor", "middle")
-    .text("Country-wise breakdown of Unemployment due to COVID-19")
-    .style("fill", "black")
-    .style("font-size", 20)
-    .style("font-family", "Arial Black")    
-
-//append circle 
-var circlesGroup = d3.select("svg")
-    .selectAll("circle")
-    .append("g")
-    .data(unemploymentdata)
-    .enter()
-    .append("circle")
-    .attr("cx", d => xScale(d.Time_dt))
-    .attr("cy", d => yScale(d.Unemployment_Rate))
-    .attr("r", 6)
-    .style("fill", d => color(d.Country))
-
-
-//append legends
-var legend = d3.select("svg")
-    .selectAll('g.legend')
-    .data(sumstat)
-    .enter()
-    .append("g")
-    .attr("class", "legend")
-
-// Initialize tool tip 
-var toolTip = d3.tip()
-      .attr("class", "tooltip")
-      .offset([40, 40])
-      .html(function(d) {
-        return (`${d.Country}<br>${d.Unemployment_Rate}`);
+      // Step 3: Create "mouseout" event listener to hide tooltip
+      .on("mouseout", function() {
+        toolTip.style("display", "none");
       });
 
-    // Create tool tip
-    // ==============================
-    d3.select("svg")
-        .call(toolTip);
+    // Create axes labels
+    chartGroup.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 20)
+      .attr("x", 0 - (height / 1.5))
+      .attr("dy", "1em")
+      .attr("class", "axisText")
+      .text("Unemployment Rates Worldwide (%)");
 
-    // Create event listeners to display and hide the tooltip
-    // ==============================
-    circlesGroup.on("click", function(data) {
-      toolTip.show(data, this);
-    })
-      // onmouseout event
-      .on("mouseout", function(data, index) {
-        toolTip.hide(data);
-      });
-
-})
-
+    chartGroup.append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
+      .attr("class", "axisText")
+      .text("April 2020 to September 2020");
+  }).catch(function(error) {
+    console.log(error);
+  });

@@ -1,21 +1,13 @@
-.axis path{
-    stroke:black;
-    stroke-width:2px ;
-}   
-
-.axis line{
-    stroke: black;
-    stroke-width: 1.5px;
-} 
-
-.axis text{
-    fill: black;
-    font-weight: bold;
-    font-size: 14px;
-    font-family:"Arial Black", Gadget, sans-serif;
-} 
-
-.legend text{
-    fill:  black;
-    font-family:"Arial Black", Gadget, sans-serif;
-}
+.tooltip {
+    position: absolute;
+    width: 80px;
+    height: 50px;
+    padding: 10px;
+    font: 12px sans-serif;
+    text-align: center;
+    color: white;
+    background: blue;
+    border: 0;
+    border-radius: 10px;
+    display: none;
+  }

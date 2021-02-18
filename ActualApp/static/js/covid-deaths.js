@@ -1,3 +1,7 @@
+var Datas =d3.json('/api_covid_infection')
+
+console.log(Datas)
+
 function pietotalCases(){
   d3.json('/api_covid_infection').then(function(response){
     var country = response.map(covid=>covid.Country);
@@ -177,7 +181,7 @@ function piePopulation(){
   d3.json('/api_covid_infection').then(function(response){
     var country = response.map(covid=>covid.Country);
     var population = response.map(covid=>covid.Population);
-    console.log(country);
+    console.log(response);
     var populationData = [{
       values: population,
       labels: country,

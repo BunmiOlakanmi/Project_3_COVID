@@ -9,7 +9,7 @@ function pietotaldeaths(){
       var deaths = response.map(covid=>covid.deaths);
       // console.log(country);
       
-      var totaldeathsdata = [{
+      var totaldeathsData = [{
         values: deaths,
         labels: Jurisdiction,
         //domain: {column: 0},
@@ -33,7 +33,7 @@ function pietotaldeaths(){
           y: 0.5
         }
       };
-    Plotly.newPlot("pie", totaldeathsdata, totaldeathsLayout);
+    Plotly.newPlot("pie", totaldeathsData, totaldeathsLayout);
     });
   }
   
@@ -44,7 +44,7 @@ function pietotaldeaths(){
       var expecteddeaths = response.map(covid=>covid.expected_deaths);
       // console.log(country);
      
-      var totalexpecteddeaths = [{
+      var expecteddeathsData = [{
         values: expecteddeaths,
         labels: jurisdiction,
         //domain: {column: 0},
@@ -68,7 +68,7 @@ function pietotaldeaths(){
           y: 0.5
         }
       };
-    Plotly.newPlot("pie", totalexpecteddeaths, totalexpecteddeathslayout);
+    Plotly.newPlot("pie", expecteddeathsData, totalexpecteddeathslayout);
     });
   }
   

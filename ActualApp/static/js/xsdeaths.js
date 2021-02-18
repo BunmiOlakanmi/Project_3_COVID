@@ -1,3 +1,8 @@
+var Datas =d3.json('/api_excessdeaths')
+
+console.log(Datas)
+
+
 function pietotaldeaths(){
     d3.json("/api_excessdeaths").then(function(response){
       var country = response.map(covid=>covid.Country);
@@ -5,7 +10,7 @@ function pietotaldeaths(){
       // console.log(country);
       
       var totaldeathsdata = [{
-        values: totaldeaths,
+        values: deaths,
         labels: country,
         //domain: {column: 0},
         name: 'Total Deaths',
@@ -40,7 +45,7 @@ function pietotaldeaths(){
       // console.log(country);
      
       var totalExpectedDeaths = [{
-        values: totalDeaths,
+        values: totalexpecteddeaths,
         labels: country,
         //domain: {column: 0},
         name: 'Total Expected Deaths',
@@ -75,7 +80,7 @@ function pietotaldeaths(){
       // console.log(country);
       
       var excessdeathsData = [{
-        values: activeCases,
+        values: excessdeaths,
         labels: country,
         //domain: {column: 0},
         name: 'Active Cases',
@@ -98,7 +103,7 @@ function pietotaldeaths(){
           y: 0.5
         }
       };
-    Plotly.newPlot("pie", excessdeathssData, excessdeathsLayout);
+    Plotly.newPlot("pie", excessdeathsData, excessdeathsLayout);
     });
   }
   

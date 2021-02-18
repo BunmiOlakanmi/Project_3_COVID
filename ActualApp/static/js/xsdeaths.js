@@ -5,13 +5,13 @@ console.log(Datas)
 
 function pietotaldeaths(){
     d3.json("/api_excessdeaths").then(function(response){
-      var country = response.map(covid=>covid.Country);
+      var jurisdiction = response.map(covid=>covid.Jurisdiction);
       var deaths = response.map(covid=>covid.deaths);
       // console.log(country);
       
       var totaldeathsdata = [{
         values: deaths,
-        labels: country,
+        labels: jurisdiction,
         //domain: {column: 0},
         name: 'Total Deaths',
         hoverinfo: 'labels + values + name',
@@ -21,7 +21,7 @@ function pietotaldeaths(){
       }];
   
       var totaldeathsLayout = {
-        title: 'Excess deaths due to COVID-19 by Country',
+        title: 'Excess deaths due to COVID-19 by Jurisdiction',
         annotations: 
           {
             font: {
@@ -40,13 +40,13 @@ function pietotaldeaths(){
   
   function pieexpecteddeaths(){
     d3.json("/api_excessdeaths").then(function(response){
-      var country = response.map(covid=>covid.Country);
+      var jurisdiction = response.map(covid=>covid.Jurisdiction);
       var totalexpecteddeaths = response.map(covid=>covid.expected_deaths);
       // console.log(country);
      
       var totalExpectedDeaths = [{
         values: totalexpecteddeaths,
-        labels: country,
+        labels: jurisdiction,
         //domain: {column: 0},
         name: 'Total Expected Deaths',
         hoverinfo: 'labels + values + name',
@@ -56,7 +56,7 @@ function pietotaldeaths(){
       }];
   
       var totalExpectedDeathsLayout = {
-        title: 'Excess deaths due to COVID-19 by Country',
+        title: 'Excess deaths due to COVID-19 by Jurisdiction',
         annotations: 
           {
             font: {
@@ -75,15 +75,15 @@ function pietotaldeaths(){
   
   function pieexcessdeaths(){
     d3.json("/api_excessdeaths").then(function(response){
-      var country = response.map(covid=>covid.Country);
+      var jurisdiction = response.map(covid=>covid.Jurisdiction);
       var excessdeaths = response.map(covid=>covid.excess_deaths);
       // console.log(country);
       
       var excessdeathsData = [{
         values: excessdeaths,
-        labels: country,
+        labels: jurisdiction,
         //domain: {column: 0},
-        name: 'Active Cases',
+        name: 'Excess Deaths',
         hoverinfo: 'labels + values + name',
         textinfo: 'none',
         hole: .4,
@@ -91,7 +91,7 @@ function pietotaldeaths(){
       }];
   
       var excessdeathsLayout = {
-        title: 'Excess deaths due to COVID-19 by Country',
+        title: 'Excess deaths due to COVID-19 by Jurisdiction',
         annotations: 
           {
             font: {
@@ -119,7 +119,7 @@ function pietotaldeaths(){
     else if (selectedData =="Expected Deaths"){
       var panel = d3.select("#pie");
       panel.html("");
-      ppieexpecteddeaths();
+      pieexpecteddeaths();
     }
     else if (selectedData == "Excess Deaths"){
       var panel = d3.select("#pie");

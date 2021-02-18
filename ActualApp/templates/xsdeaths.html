@@ -6,11 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Unemployment Data Visualized</title>
+    <title>Excess Death Data Visualized</title>
     <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style1.css') }}">
 </head>
 
 <body>
@@ -18,22 +19,22 @@
         <div class="navbar-collapse collapse" >
                     <a class="nav-link list" href="/">Covid-19 Infection Data</a>
                     <a class="nav-link list" href="/influenza">Influenza Data</a>
-                    <a class="nav-link list" href='/unemployment'>Unemployment Data</a>
+                    <a class="nav-link list" href='/xsdeaths'>Excess Death Data</a>
         </div>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
     </nav>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
     <div class="container">
         
          <div class="row banner">
           <div class="col-md-12 jumbotron text-center">
-            <h2 class="banner">Unemployment Data Visualized</h2>
+            <h2 class="banner">Excess Death Data Visualized</h2>
           </div>
         
         </div>
         <div class="row">
           <div class="col-md-2">
             <div class="panel panel-primary">
-              <div id="data-type" class="panel-body"></div>
+              <!--<div id="data-type" class="panel-body"></div>-->
             </div>
           </div>
           <div class="row">
@@ -44,11 +45,15 @@
       </div>
 
 
-
+    <!-- svg canvas-->
+    <svg width="1500" height="750" style="background-image: url('https://etc.usf.edu/presentations/backgrounds/grid/grid_04/1304m.gif');"></svg>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
     <!--<script src="{{ url_for('static', filename='js/app.js') }}"></script>-->
-    <script src ="./static/js/covid-deaths.js"></script>
+    <script src ="./static/js/unemployment-rate.js"></script>
 </body>
 
 </html>

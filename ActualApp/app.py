@@ -27,9 +27,9 @@ def index():
 def influenzaPage():
     return render_template("influenza.html")
 
-@app.route('/unemployment')
+@app.route('/xsdeaths')
 def unemploymentPage():
-    return render_template("unemployment.html")
+    return render_template("xsdeaths.html")
 
 #service route
 #covid infection data route
@@ -57,9 +57,9 @@ def influenzaRoute():
     return jsonify(master_list)
 
 #unemployment data route
-@app.route("/api_unemployment")
+@app.route("/api_excessdeaths")
 def unemploymentRoute():
-    test=db.get_collection("collection_unemployment").find()
+    test=db.get_collection("collection_xsdeath").find()
     master_list=[]
     for i in test:
         master_list.append(i)

@@ -56,7 +56,7 @@ def influenzaRoute():
 
     return jsonify(master_list)
 
-#unemployment data route
+#excess death data route
 @app.route("/api_excessdeaths")
 def unemploymentRoute():
     test=db.get_collection("collection_xsdeath").find()

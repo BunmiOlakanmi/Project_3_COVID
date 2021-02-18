@@ -131,7 +131,7 @@ function pietotaldeaths(){
   
   function init() {
     var dropdownValues= ["Total Deaths", "Expected Deaths", "Excess Deaths"];
-    var dropdownMenu = d3.select("#selDataset");
+    var dropdownMenu = d3.select("#selData");
     dropdownValues.forEach((sample)=>{
       dropdownMenu.append("option")
       .text(sample)

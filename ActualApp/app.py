@@ -25,7 +25,7 @@ def index():
 
 @app.route('/influenza')
 def influenzaPage():
-    return render_template("influenza.html")
+    return render_template("index_influenza.html")
 
 @app.route('/xsdeaths')
 def unemploymentPage():

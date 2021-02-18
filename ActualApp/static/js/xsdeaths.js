@@ -5,13 +5,13 @@ console.log(Datas)
 
 function pietotaldeaths(){
     d3.json("/api_excessdeaths").then(function(response){
-      var jurisdiction = response.map(covid=>covid.Jurisdiction);
+      var Jurisdiction = response.map(covid=>covid.Jurisdiction);
       var deaths = response.map(covid=>covid.deaths);
       // console.log(country);
       
       var totaldeathsdata = [{
         values: deaths,
-        labels: jurisdiction,
+        labels: Jurisdiction,
         //domain: {column: 0},
         name: 'Total Deaths',
         hoverinfo: 'labels + values + name',
@@ -21,7 +21,7 @@ function pietotaldeaths(){
       }];
   
       var totaldeathsLayout = {
-        title: 'Total deaths due to COVID-19 by Jurisdiction',
+        title: 'Total deaths due to COVID-19 by Country',
         annotations: 
           {
             font: {
@@ -44,7 +44,7 @@ function pietotaldeaths(){
       var expecteddeaths = response.map(covid=>covid.expected_deaths);
       // console.log(country);
      
-      var expecteddeathsdata = [{
+      var totalexpecteddeaths = [{
         values: expecteddeaths,
         labels: jurisdiction,
         //domain: {column: 0},
@@ -55,8 +55,8 @@ function pietotaldeaths(){
         type: 'pie'
       }];
   
-      var totalexpecteddeathsLayout = {
-        title: 'Expected deaths due to COVID-19 by Jurisdiction',
+      var totalexpecteddeathslayout = {
+        title: 'Expected deaths due to COVID-19 by Country',
         annotations: 
           {
             font: {
@@ -68,7 +68,7 @@ function pietotaldeaths(){
           y: 0.5
         }
       };
-    Plotly.newPlot("pie", expecteddeathsdata, totalexpecteddeathsLayout);
+    Plotly.newPlot("pie", totalexpecteddeaths, totalexpecteddeathslayout);
     });
   }
   
@@ -91,7 +91,7 @@ function pietotaldeaths(){
       }];
   
       var excessdeathsLayout = {
-        title: 'Excess deaths due to COVID-19 by Jurisdiction',
+        title: 'Excess deaths due to COVID-19 by Country',
         annotations: 
           {
             font: {

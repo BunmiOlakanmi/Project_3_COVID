@@ -16,7 +16,7 @@ function pietotaldeaths(){
       }];
   
       var totaldeathsLayout = {
-        title: 'Total COVID-19 Deaths by Country',
+        title: 'Excess deaths due to COVID-19 by Country',
         annotations: 
           {
             font: {
@@ -51,7 +51,7 @@ function pietotaldeaths(){
       }];
   
       var totalExpectedDeathsLayout = {
-        title: 'Total COVID-19 Deaths by Country',
+        title: 'Excess deaths due to COVID-19 by Country',
         annotations: 
           {
             font: {
@@ -86,7 +86,7 @@ function pietotaldeaths(){
       }];
   
       var excessdeathsLayout = {
-        title: 'Active COVID-19 Cases by Country',
+        title: 'Excess deaths due to COVID-19 by Country',
         annotations: 
           {
             font: {
@@ -125,7 +125,7 @@ function pietotaldeaths(){
   }
   
   function init() {
-    var dropdownValues= ["Total Cases", "Total Deaths", "Active Cases", "Total Recovered", "Total Tests", "Population"];
+    var dropdownValues= ["Total Deaths", "Expected Deaths", "Excess Deaths"];
     var dropdownMenu = d3.select("#selDataset");
     dropdownValues.forEach((sample)=>{
       dropdownMenu.append("option")

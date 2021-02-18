@@ -14,22 +14,6 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   accessToken: API_KEY
 }).addTo(myMap);
 
-// // Function to determine marker size based on population
-// function markerSize(deaths) {
-//   return deaths / 40;
-// }
-
-
-
-// // Perform a GET request to the query URL
-// d3.json('/api_influenza', function(data) {
-//   // Once we get a response, send the data.features object to the createFeatures function
-//   createFeatures(data.features);
-//   console.log(data);
-// });
-
-// //console.log(data)
-
 
 ///State Data
 

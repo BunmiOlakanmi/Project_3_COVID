@@ -5,13 +5,13 @@ console.log(Datas)
 
 function pietotaldeaths(){
     d3.json("/api_excessdeaths").then(function(response){
-      var country = response.map(covid=>covid.Country);
+      var Jurisdiction = response.map(covid=>covid.Jurisdiction);
       var deaths = response.map(covid=>covid.deaths);
       // console.log(country);
       
       var totaldeathsdata = [{
         values: deaths,
-        labels: country,
+        labels: Jurisdiction,
         //domain: {column: 0},
         name: 'Total Deaths',
         hoverinfo: 'labels + values + name',
@@ -83,7 +83,7 @@ function pietotaldeaths(){
         values: excessdeaths,
         labels: country,
         //domain: {column: 0},
-        name: 'Active Cases',
+        name: 'Excess Deaths',
         hoverinfo: 'labels + values + name',
         textinfo: 'none',
         hole: .4,

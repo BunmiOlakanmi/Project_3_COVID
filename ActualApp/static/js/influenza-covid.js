@@ -3,7 +3,11 @@
 // console.log(Datas)
 
 function popups(){
-      //Create a map object
+     
+  document.getElementById('map-container').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
+
+    //Create a map object
+
     var myMap = L.map("map", {
       center: [39.011902, -98.484246],
       zoom: 3
@@ -66,6 +70,8 @@ function popups(){
 
 
 function markercircles(){
+  document.getElementById('map-container').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
+
     // Streetmap Layer
   var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
@@ -175,13 +181,14 @@ function markercircles(){
 function optionChanged(selectedData){
   if (selectedData =="Aggregate Deaths"){
     d3.select("#bar").selectAll("svg").remove()
-    var panel = d3.select("#mapops");
+    var panel = d3.select("#bar-plot");
     panel.html("");
+  
     popups();
   } 
-  else if (selectedData =="Covid vs Influenza"){
+  else if (selectedData =="Influenza vs COVID-19 Deaths"){
     d3.select("#bar").selectAll("svg").remove()
-    var panel = d3.select("#mapops");
+    var panel = d3.select("#bar-plot");
     
     panel.html("");
     markercircles();
@@ -191,6 +198,8 @@ function optionChanged(selectedData){
 }
 
 function init() {
+  document.getElementById('map-container').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
+  
   d3.json('/api_influenza').then(function(response){
     var state = response.map(flu => flu.NAME);
     var total_deaths = response.map(flu=>flu.Total_Deaths);

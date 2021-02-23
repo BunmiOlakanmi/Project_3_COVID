@@ -127,7 +127,7 @@ function markercircles(){
       COVIDDeathMarkers.push(
         L.circle(coordinates, {
         stroke: false,
-        fillOpacity: 0.75,
+        fillOpacity: 0.8,
         color: "white",
         fillColor: "white",
         radius: markerSize(city['COVID-19_Deaths'])
@@ -193,6 +193,15 @@ function optionChanged(selectedData){
     panel.html("");
     markercircles();
   }
+
+  else if (selectedData =="Total Deaths"){
+    d3.select("#map").selectAll("svg").remove()
+    var panel = d3.select("#map");
+    
+    panel.html("");
+    init();
+  }
+  
 
   
 }
